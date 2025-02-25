@@ -57,6 +57,11 @@ export function AudioPlayer() {
     audioElement.pause();
     audioElement.src = trackSelect.value;
     coverElement.src = trackSelect.selectedOptions[0].getAttribute("img");
+
+    //update Playbar
+    const percentage = 0;
+    durationBar.style.background = `linear-gradient(to right, #4ddd6f ${percentage}%, rgb(83, 83, 83) ${percentage}%)`;
+
     playButton.innerHTML = playSymbol;
   });
 
