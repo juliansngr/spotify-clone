@@ -19,3 +19,9 @@ Creating a **Spotify** clone with the following functionality:
 - Interactive playbar, indicating track progress and letting the user scroll through the running track
 - First version of track selection with dynamic cover change
 - Volume slider with full volume control
+
+---
+
+### Preview:
+
+<img src="https://i.imgur.com/lMnfEoU.png" alt="drawing" width="600"/>
