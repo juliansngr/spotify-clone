@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Player mit Track-Selektor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+      .audio-player {
+        width: 350px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .progress-bar {
+        width: 100%;
+        margin: 10px 0;
+      }
+      select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="audio-player">
+      <h3>Wähle einen Track:</h3>
+      <select id="trackSelector">
+        <option
+          value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        >
+          Track 1
+        </option>
+        <option
+          value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+        >
+          Track 2
+        </option>
+        <option
+          value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+        >
+          Track 3
+        </option>
+      </select>
+
+      <audio id="audio">
+        <source
+          id="audioSource"
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+          type="audio/mpeg"
+        />
+        Dein Browser unterstützt kein Audio-Element.
+      </audio>
+
+      <button id="playPauseBtn">▶️</button>
+      <input
+        type="range"
+        id="progressBar"
+        class="progress-bar"
+        value="0"
+        min="0"
+        max="100"
+        step="0.1"
+      />
+      <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+    </div>
+
+    <script>
+      const audio = document.getElementById("audio");
+      const audioSource = document.getElementById("audioSource");
+      const playPauseBtn = document.getElementById("playPauseBtn");
+      const progressBar = document.getElementById("progressBar");
+      const currentTimeDisplay = document.getElementById("currentTime");
+      const durationDisplay = document.getElementById("duration");
+      const trackSelector = document.getElementById("trackSelector");
+
+      // Play/Pause Button
+      playPauseBtn.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          playPauseBtn.textContent = "⏸️";
+        } else {
+          audio.pause();
+          playPauseBtn.textContent = "▶️";
+        }
+      });
+
+      // Fortschrittsanzeige aktualisieren
+      audio.addEventListener("timeupdate", () => {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progress;
+        currentTimeDisplay.textContent = formatTime(audio.currentTime);
+      });
+
+      // Fortschrittsbalken zum Springen verwenden
+      progressBar.addEventListener("input", () => {
+        audio.currentTime = (progressBar.value / 100) * audio.duration;
+      });
+
+      // Dauer des Audios setzen
+      audio.addEventListener("loadedmetadata", () => {
+        durationDisplay.textContent = formatTime(audio.duration);
+      });
+
+      // Track wechseln
+      trackSelector.addEventListener("change", () => {
+        audio.pause();
+        audioSource.src = trackSelector.value;
+        audio.load();
+        playPauseBtn.textContent = "▶️";
+      });
+
+      // Funktion zum Formatieren der Zeit in mm:ss
+      function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+      }
+    </script>
+  </body>
+</html>
