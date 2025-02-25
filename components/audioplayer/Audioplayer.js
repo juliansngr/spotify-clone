@@ -59,8 +59,8 @@ export function AudioPlayer() {
     coverElement.src = trackSelect.selectedOptions[0].getAttribute("img");
 
     //update Playbar
-    const percentage = 0;
-    durationBar.style.background = `linear-gradient(to right, #4ddd6f ${percentage}%, rgb(83, 83, 83) ${percentage}%)`;
+
+    durationBar.style.background = `linear-gradient(to right, #4ddd6f 0%, rgb(83, 83, 83) 0%)`;
 
     playButton.innerHTML = playSymbol;
   });
