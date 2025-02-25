@@ -63,6 +63,8 @@ body {
 .audioplayer__coverimage {
   width: 400px;
   height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .trackselect__select {
