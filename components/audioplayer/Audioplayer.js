@@ -37,6 +37,22 @@ export function AudioPlayer() {
   durationBar.setAttribute("type", "range");
   durationBar.classList.add("audioplayer__progressbar");
 
+  // Create Volume Slider
+
+  const volumeSlider = document.createElement("input");
+  volumeSlider.setAttribute("type", "range");
+  volumeSlider.max = 1;
+  volumeSlider.step = 0.01;
+  volumeSlider.classList.add("volume__slider");
+
+  volumeSlider.addEventListener("input", () => {
+    console.log(volumeSlider.value);
+    audioElement.volume = volumeSlider.value;
+
+    const percentage = (volumeSlider.value / 1) * 100;
+    volumeSlider.style.background = `linear-gradient(to right, #4ddd6f ${percentage}%, rgb(83, 83, 83) ${percentage}%)`;
+  });
+
   const trackSelect = document.createElement("select");
   trackSelect.classList.add("trackselect__select");
 
@@ -59,7 +75,8 @@ export function AudioPlayer() {
     coverElement,
     trackSelect,
     durationBar,
-    buttonContainer
+    buttonContainer,
+    volumeSlider
   );
 
   playButton.addEventListener("click", () => {
