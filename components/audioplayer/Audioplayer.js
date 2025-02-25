@@ -1,5 +1,6 @@
 import { audioDatabase } from "../../utils/audio-database.js";
 import { pauseSymbol, playSymbol } from "../../utils/svg.js";
+import Volumeslider from "../volume-slider/Volumeslider.js";
 
 function playAudio(audioElement) {
   audioElement.play();
@@ -15,6 +16,7 @@ function stopAudio(audioElement) {
 
 export function AudioPlayer() {
   const audioElement = document.createElement("audio");
+
   const audioSource = document.createElement("source");
   audioElement.append(audioSource);
 
@@ -37,21 +39,8 @@ export function AudioPlayer() {
   durationBar.setAttribute("type", "range");
   durationBar.classList.add("audioplayer__progressbar");
 
-  // Create Volume Slider
-
-  const volumeSlider = document.createElement("input");
-  volumeSlider.setAttribute("type", "range");
-  volumeSlider.max = 1;
-  volumeSlider.step = 0.01;
-  volumeSlider.classList.add("volume__slider");
-
-  volumeSlider.addEventListener("input", () => {
-    console.log(volumeSlider.value);
-    audioElement.volume = volumeSlider.value;
-
-    const percentage = (volumeSlider.value / 1) * 100;
-    volumeSlider.style.background = `linear-gradient(to right, #4ddd6f ${percentage}%, rgb(83, 83, 83) ${percentage}%)`;
-  });
+  audioElement.src = audioDatabase[0].path;
+  coverElement.src = audioDatabase[0].cover;
 
   const trackSelect = document.createElement("select");
   trackSelect.classList.add("trackselect__select");
@@ -70,14 +59,6 @@ export function AudioPlayer() {
     coverElement.src = trackSelect.selectedOptions[0].getAttribute("img");
     playButton.innerHTML = playSymbol;
   });
-
-  audioPlayerElement.append(
-    coverElement,
-    trackSelect,
-    durationBar,
-    buttonContainer,
-    volumeSlider
-  );
 
   playButton.addEventListener("click", () => {
     durationBar.setAttribute("max", `${audioElement.duration}`);
@@ -103,6 +84,16 @@ export function AudioPlayer() {
 
     durationBar.style.background = `linear-gradient(to right, #4ddd6f ${percentage}%,rgb(83, 83, 83) ${percentage}%)`;
   });
+
+  const VolumesliderComponent = Volumeslider(audioElement);
+
+  audioPlayerElement.append(
+    coverElement,
+    trackSelect,
+    durationBar,
+    buttonContainer,
+    VolumesliderComponent
+  );
 
   document.body.append(audioPlayerElement);
 }
