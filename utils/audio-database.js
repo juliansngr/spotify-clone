@@ -1,22 +1,22 @@
 export const audioDatabase = [
   {
-    name: "SNUS (Juli Remix)",
-    cover: "./cover/snus.png",
-    path: "./audio/snus.mp3",
+    name: "Gibran Alcocer - Idea 1",
+    cover: "./cover/idea1.jpg",
+    path: "./audio/idea1.mp3",
   },
   {
-    name: "Ballin (Juli Remix)",
-    cover: "./cover/ballin.jpg",
-    path: "./audio/ballin.mp3",
+    name: "Gibran Alcocer - Idea 10",
+    cover: "./cover/idea10.jpg",
+    path: "./audio/idea10.mp3",
   },
   {
-    name: "JULI - Fireflies",
-    cover: "./cover/fireflies.jpg",
-    path: "./audio/fireflies.mp3",
+    name: "Gibran Alcocer - Idea 15",
+    cover: "./cover/idea15.jpg",
+    path: "./audio/idea15.mp3",
   },
   {
-    name: "iNovation - Volkstempo",
-    cover: "./cover/volkstempo.jpg",
-    path: "./audio/volkstempo.mp3",
+    name: "Gibran Alcocer - Idea 22",
+    cover: "./cover/idea22.jpg",
+    path: "./audio/idea22.mp3",
   },
 ];
