@@ -1,4 +1,4 @@
-import { AudioPlayer } from "./components/audioplayer/audioplayer.js";
+import { AudioPlayer } from "./components/audioplayer/Audioplayer.js";
 
 console.clear();
 
